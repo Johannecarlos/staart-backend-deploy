@@ -7,6 +7,7 @@ info:
 
 servers:
   - url: http://localhost:3000/
+    description: Local deployment server- url: https://staart-backend-deploy-main-production.up.railway.app/
     description: Local deployment server
 
 paths:
