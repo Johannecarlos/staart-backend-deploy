@@ -7,7 +7,8 @@
     "start": "node src/index.js",
     "dev": "nodemon --inspect src/index.js",
     "migrations:add": "echo 'Migration name' && read migration_name && knex migrate:make $migration_name --knexfile=.knexfile.js",
-    "migrations:migrate": "knex migrate:latest --knexfile=.knexfile.js"
+    "migrations:migrate": "knex migrate:latest --knexfile=.knexfile.js",
+    "build": "knex migrate:latest --knexfile=.knexfile.js"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,7 @@
     "knex": "^2.0.0",
     "migrations": "^1.3.0",
     "mysql2": "^2.3.3",
+    "newrelic": "^9.10.1",
     "swagger-ui-express": "^4.4.0"
   }
 }
