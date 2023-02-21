@@ -3,12 +3,37 @@ name: Deploy
 on: push
 
 jobs:
+production:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      -uses: actions/setup-node@v3
+        with:
+        node-version: 16
+      - run: npm install
+      - run: npm run migrations:migrate
+        env:
+          DB_URL: ${{secrets.DB_URL}}
       - uses: akhileshns/heroku-deploy@v3.12.13
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "staart-backend-deploy-main"
+          heroku_email: ${{secrets.HEROKU_USER_EMAIL}}
+  development:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      -uses: actions/setup-node@v3
+        with:
+        node-version: 16
+      - run: npm install
+      - run: npm run migrations:migrate
+        env:
+          DB_URL: ${{secrets.DB_URL_DEV}}
+      - uses: akhileshns/heroku-deploy@v3.12.13
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "staart-backend-deploy-main-dev"
           heroku_email: ${{secrets.HEROKU_USER_EMAIL}}
